@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Ulang Tahun, Sayang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #140b1d;
+      --panel: #26153a;
+      --panel-2: #35204d;
+      --text: #fcefdc;
+      --muted: #d8c0e7;
+      --pink: #ff7ba6;
+      --gold: #ffcf74;
+      --line: rgba(255, 207, 116, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #2b1542 0%, var(--bg) 55%, #0f0714 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-hearts, .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart, .confetti-piece {
+      position: absolute;
+      animation: floatUp linear infinite;
+      opacity: 0.9;
+    }
+
+    .heart {
+      font-size: 1.2rem;
+      color: var(--pink);
+      text-shadow: 0 0 8px rgba(255, 123, 166, 0.35);
+    }
+
+    .confetti-piece {
+      width: 8px;
+      height: 14px;
+      border-radius: 2px;
+      opacity: 0.8;
+      animation-duration: 5s;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0.8) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1.1) rotate(360deg); opacity: 0; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 18px 70px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .hero-card {
+      width: 100%;
+      padding: 34px 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.8rem, 7vw, 4.6rem);
+      margin-bottom: 12px;
+      color: #ffd89d;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--pink), #ff9eb2);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(255, 123, 166, 0.25);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(255, 123, 166, 0.35); }
+
+    section { padding: 34px 0; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+      margin-bottom: 8px;
+    }
+    .section-title p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, var(--panel), var(--panel-2));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .romance-card p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #f8ebce;
+      font-style: italic;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .photo-card {
+      background: #f8eddc;
+      color: #4f3d2b;
+      border-radius: 16px;
+      padding: 12px 12px 16px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.24);
+      transform: rotate(-1deg);
+      transition: transform 0.25s ease;
+    }
+
+    .photo-card:hover { transform: rotate(0deg) scale(1.02); }
+
+    .photo-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #e5d7be;
+      border-radius: 12px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-card .caption {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 40px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.8;
+    }
+
+    .footer p {
+      margin-bottom: 12px;
+    }
+
+    .footer p:first-child {
+      font-size: 1.05rem;
+      color: #ff7ba6;
+      font-weight: 600;
+    }
+
+    .footer p:last-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.08rem;
+      color: #ffd89d;
+    }
+
+    @media (max-width: 800px) {
+      .cards, .gallery { grid-template-columns: 1fr 1fr; }
+      .container { padding: 16px 12px 50px; }
+    }
+
+    @media (max-width: 560px) {
+      .cards, .gallery { grid-template-columns: 1fr; gap: 12px; }
+      .container { padding: 16px 10px 40px; }
+      
+      h1 { font-size: 2.2rem; }
+      .hero-card { padding: 24px 16px; }
+      .hero p { font-size: 0.9rem; }
+      
+      .section-title h2 { font-size: 1.4rem; }
+      .section-title p { font-size: 0.85rem; padding: 0 8px; }
+      
+      .card { padding: 14px; }
+      .romance-card p { font-size: 0.9rem; }
+      
+      .photo-card { padding: 10px 10px 14px; }
+      
+      .btn { padding: 10px 18px; font-size: 0.8rem; }
+      
+      .footer { padding-top: 20px; padding-bottom: 30px; font-size: 0.9rem; }
+      .footer p { margin-bottom: 10px; }
+      .footer p:first-child { font-size: 0.95rem; }
+      .footer p:last-child { font-size: 0.98rem; }
+      
+      section { padding: 24px 0; }
+    }
+
+    @media (max-width: 380px) {
+      h1 { font-size: 1.8rem; }
+      .section-title h2 { font-size: 1.2rem; }
+      .hero-card { padding: 20px 12px; }
+      .card { padding: 12px; }
+      .container { padding: 12px 8px 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-hearts" id="bgHearts"></div>
+  <div class="confetti" id="confetti"></div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">Untuk pacarku yang paling kusayang</div>
+        <h1>Selamat Ulang Tahun, Sayang</h1>
+        <p>
+          Kamu tahu, setiap pagi yang aku bangun adalah momen terindah karena aku bisa melihatmu ada di hidupku.
+          Di hari istimewa ini, aku ingin bilang berkali-kali: aku mencintaimu. Tidak hanya dengan kata-kata,
+          tetapi dengan setiap tindakan, setiap keputusan, dan setiap momen bersama. Semoga ulang tahunmu penuh cinta.
+        </p>
+        <button class="btn" id="surpriseBtn">Buka Kejutan</button>
+      </div>
+    </section>
+
+    <section id="romance">
+      <div class="section-title">
+        <div class="eyebrow">Kata-kata untukmu</div>
+        <h2>Romantis dari hati</h2>
+        <p>Setiap kata di sini adalah bentuk cinta sederhana yang aku punya untukmu.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card romance-card">
+          <p>“Kamu adalah alasan mengapa hatiku merasa aman, hangat, dan selalu ingin pulang.”</p>
+        </div>
+        <div class="card romance-card">
+          <p>“Aku tidak hanya mencintaimu di hari-hari indah, tetapi juga saat dunia terasa berat.”</p>
+        </div>
+        <div class="card romance-card">
+          <p>“Semoga di usia yang baru ini, kamu semakin bahagia, semakin cantik, dan semakin dekat dengan semua impianmu.”</p>
+        </div>        <div class="card romance-card">
+          <p>"Bersamamu, aku belajar bahwa cinta sejati adalah memilih untuk tetap bersama setiap hari."</p>
+        </div>
+        <div class="card romance-card">
+          <p>"Terima kasih telah membuat setiap hari biasa menjadi hari yang penuh makna dan kebahagiaan."</p>
+        </div>
+        <div class="card romance-card">
+          <p>"Kamu adalah hadiah terbaik yang pernah diberikan hidup kepadaku, dan aku akan menjagamu selamanya."</p>
+        </div>      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-title">
+        <div class="eyebrow">Penuh Cinta Dari OranG Paling Ganteng </div>
+        <h2>Galeri Kenangan</h2>
+        <p>Ini Foto Isinya Gula Semuaaa, Manis Bangettt!!! </p>
+      </div>
+
+      <div class="gallery" id="galleryGrid"></div>
+    </section>
+
+    <div class="footer">
+      <p>✨ Terima kasih telah menjadi alasan terbesar kebahagiaanku setiap hari, sayang. ✨</p>
+      <p>Selamat ulang tahun untuk orang yang paling aku cintai. Semoga setiap detik hidup kamu penuh makna, kebahagiaan, dan tentu saja, penuh cinta dariku.</p>
+      <p style="margin-top: 16px; font-style: italic; color: #ff7ba6;">Kamu adalah segalanya bagiku. Selamanya untukmu. 💕</p>
+    </div>
+  </div>
+
+  <script>
+    const surpriseBtn = document.getElementById('surpriseBtn');
+    const romanceSection = document.getElementById('romance');
+    surpriseBtn.addEventListener('click', () => {
+      romanceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      burstHearts();
+    });
+
+    function burstHearts() {
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = ['💖', '💗', '💞', '💕'][i % 4];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = '90vh';
+        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        heart.style.animationDelay = Math.random() * 0.4 + 's';
+        document.getElementById('bgHearts').appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+
+    function createConfetti() {
+      const colors = ['#ff7ba6', '#ffcf74', '#ffd8e3', '#ffffff'];
+      const wrap = document.getElementById('confetti');
+      for (let i = 0; i < 50; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.top = -20 + Math.random() * 20 + 'px';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (3 + Math.random() * 4) + 's';
+        piece.style.animationDelay = Math.random() * 0.5 + 's';
+        wrap.appendChild(piece);
+        setTimeout(() => piece.remove(), 7000);
+      }
+    }
+
+    createConfetti();
+    setInterval(createConfetti, 5000);
+
+    const captions = ['Semoga Semesta Selalu menjaga perempuan yang sangat aku cintai', 'Tatapanmu adalah sumber kebahagiaan terbesarku', 'senyummu adalah cahaya yang menerangi hariku', 'cantiknya bikin kangen', 'bukan cuma lucu tapi juga paling berharga ', 'Setiap Melihatmu, Aku selalu punya alasan untuk tersenyum'];
+    const galleryGrid = document.getElementById('galleryGrid');
+
+    const photoSources = [
+      './Yuli4.png',
+      './Yuli2.png',
+      './Yuli3.png',
+      './Yuli1.png',
+      './Yuli5.png',
+      './Yuli.png'
+    ];
+
+    captions.forEach((caption, index) => {
+      const card = document.createElement('div');
+      card.className = 'photo-card';
+      card.innerHTML = `
+        <div class="photo-box">
+          <img src="${photoSources[index]}" alt="Foto ${index + 1}" />
+        </div>
+        <div class="caption">${caption}</div>
+      `;
+      galleryGrid.appendChild(card);
+    });
+
+
+  </script>
+</body>
+</html>
